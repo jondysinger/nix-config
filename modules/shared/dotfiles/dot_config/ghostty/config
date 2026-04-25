@@ -1,0 +1,17 @@
+theme = Rose Pine
+
+font-family = "JetBrainsMono Nerd Font"
+
+window-padding-x = 4
+window-padding-y = 4
+
+cursor-style = block
+cursor-style-blink = false
+
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
+
+macos-option-as-alt = true
+macos-titlebar-style = tabs
+
+confirm-close-surface = false

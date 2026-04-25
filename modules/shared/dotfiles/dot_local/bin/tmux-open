@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# tmux-open [DIR]
+#
+# Create or attach to a tmux session rooted at DIR (default: cwd). The
+# session is named after the directory basename. On first launch it opens
+# an editor window running $EDITOR (default: nvim) and a second shell
+# window in the same directory, then attaches to the session.
+
+set -euo pipefail
+
+dir="${1:-$PWD}"
+name="$(basename "$dir" | tr '. ' '__')"
+
+if ! command -v tmux >/dev/null 2>&1; then
+  echo "tmux is not installed" >&2
+  exit 1
+fi
+
+if [ ! -d "$dir" ]; then
+  echo "directory not found: $dir" >&2
+  exit 1
+fi
+
+if ! tmux has-session -t "$name" 2>/dev/null; then
+  tmux new-session -d -s "$name" -c "$dir"
+  tmux rename-window -t "$name:1" editor
+  tmux send-keys -t "$name:1" "${EDITOR:-nvim}" C-m
+
+  tmux new-window -t "$name" -n shell -c "$dir"
+fi
+
+exec tmux attach -t "$name"

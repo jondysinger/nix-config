@@ -1,0 +1,13 @@
+{
+  "id": "hostname",
+  "name": "Hostname",
+  "version": "0.1.0",
+  "author": "jdysinger",
+  "description": "Shows the current host name in the Noctalia bar.",
+  "entryPoints": {
+    "barWidget": "HostnameWidget.qml"
+  },
+  "metadata": {
+    "icon": "server"
+  }
+}
