@@ -70,7 +70,6 @@
         { }:
         [
           (self + "/modules/nixos/common.nix")
-          (self + "/modules/nixos/desktop.nix")
         ];
       mkDarwinBaseModules =
         { }:

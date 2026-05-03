@@ -3,6 +3,11 @@
   ...
 }:
 {
+  imports = [
+    ../../../modules/nixos/desktop-common.nix
+    ../../../modules/nixos/desktop-gnome.nix
+  ];
+
   networking.hostName = "nas";
 
   hardware.graphics = {

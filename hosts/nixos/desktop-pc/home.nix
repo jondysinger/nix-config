@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  imports = [
+    ../../../modules/nixos/home-hyprland.nix
+  ];
+
   home.packages = [
     pkgs.mangohud
     pkgs.sunshine

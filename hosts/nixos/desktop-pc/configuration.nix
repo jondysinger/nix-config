@@ -3,6 +3,11 @@
   ...
 }:
 {
+  imports = [
+    ../../../modules/nixos/desktop-common.nix
+    ../../../modules/nixos/desktop-hyprland.nix
+  ];
+
   networking.hostName = "desktop-pc";
 
   boot.kernelParams = [

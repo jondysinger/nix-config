@@ -8,10 +8,6 @@
   ...
 }:
 {
-  imports = [
-    ./hyprland.nix
-  ];
-
   # Theme related
   stylix.targets.chromium.enable = false; # Better results to use GTK theme instead
   stylix.targets.qt = {

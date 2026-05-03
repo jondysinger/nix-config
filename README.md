@@ -1,27 +1,8 @@
-```
- __  __       _ _   _        _               _
-|  \/  |     | | | (_)      | |             | |
-| \  / |_   _| | |_ _ ______| |__   ___  ___| |_
-| |\/| | | | | | __| |______| '_ \ / _ \/ __| __|
-| |  | | |_| | | |_| |      | | | | (_) \__ \ |_
-|_|  |_|\__,_|_|\__|_|_____ |_| |_|\___/|___/\__|                _
-| \ | (_)     / __ \ / ____|     / / |  __ \                    (_)
-|  \| |___  _| |  | | (___      / /  | |  | | __ _ _ ____      ___ _ __
-| . ` | \ \/ / |  | |\___ \    / /   | |  | |/ _` | '__\ \ /\ / / | '_ \
-| |\  | |>  <| |__| |____) |  / /    | |__| | (_| | |   \ V  V /| | | | |
-|_|_\_|_/_/\_\\____/|_____/  /_/     |_____/ \__,_|_|    \_/\_/ |_|_| |_|
- / ____|           / _(_)
-| |     ___  _ __ | |_ _  __ _
-| |    / _ \| '_ \|  _| |/ _` |
-| |___| (_) | | | | | | | (_| |
- \_____\___/|_| |_|_| |_|\__, |
-                          __/ |
-                         |___/
-```
+# Multi-host NixOS / Darwin Config
 
 ![Noctalia Demo](media/examples/noctalia-demo.gif)
 
-# Repository Layout
+## Repository Layout
 
 ```text
 .
@@ -43,7 +24,7 @@
         └── dotfiles/
 ```
 
-# Key Features
+## Key Features
 
 - Shared theme and desktop defaults across NixOS and Darwin hosts through the
   common module stack and Stylix.
@@ -52,14 +33,16 @@
 - Auto host discovery. Just add the new host to the platform-specific directory.
 - Individual host overrides layered on top of the shared base, so each machine
   keeps its own hardware config, role-specific services, and platform details.
+- Per-host desktop/session composition on NixOS via explicit imports to common and
+  compositor specific modules.
 - Optional in-repo dotfiles support which automatically symlinks configs and scripts.
 - Split-repo-friendly builder functions under `lib/`, making it easy to keep
   reusable modules public while moving real inventory and secrets to a private
   wrapper.
-- Examples that include: hyprland, noctalia-shell, sunshine/moonlight, jellyfin,
-  and neovim.
+- Examples that include: Hyprland w/ noctalia-shell, GNOME, sunshine/moonlight,
+  jellyfin, and neovim.
 
-# Module Layers
+## Module Layers
 
 Configurations are assembled in this order:
 
@@ -69,19 +52,32 @@ Configurations are assembled in this order:
 4. home-manager wiring
 5. host-specific modules
 
-# Example Hosts
+For NixOS hosts, desktop/session choice lives at the host layer. Graphical
+hosts import a shared desktop base plus a session-specific system module and a
+session-specific Home Manager module.
+
+### NixOS Desktop Modules
+
+- `modules/nixos/desktop-common.nix`: shared graphical system defaults
+- `modules/nixos/desktop-hyprland.nix`: Hyprland system session
+- `modules/nixos/desktop-gnome.nix`: GNOME system session
+- `modules/nixos/home-common.nix`: shared NixOS Home Manager defaults
+- `modules/nixos/home-hyprland.nix`: Hyprland/Noctalia Home Manager config
+- `modules/nixos/home-gnome.nix`: GNOME Home Manager config
+
+## Example Hosts
 
 - `chromebook`: a laptop-oriented NixOS host
-- `desktop-pc`: a desktop/gaming-oriented NixOS host
-- `nas`: a NixOS media/storage host
+- `desktop-pc`: a Hyprland desktop/gaming-oriented NixOS host
+- `nas`: a GNOME-based NixOS media/storage host
 - `mac-mini`: a nix-darwin workstation
 
-# Standalone Usage
+## Standalone Usage
 
 When using this repository directly, the checked-in hosts are available as flake
 outputs under `nixosConfigurations` and `darwinConfigurations`.
 
-## Update package inputs
+### Update package inputs
 
 Update all flake inputs:
 
@@ -89,7 +85,7 @@ Update all flake inputs:
 nix flake update
 ```
 
-## Rebuild/Switch a host
+### Rebuild/Switch a host
 
 Apply a NixOS host configuration on the target machine:
 
@@ -106,14 +102,14 @@ sudo darwin-rebuild switch --flake .#mac-mini
 Replace the host name with any checked-in standalone host, such as
 `chromebook`, `desktop-pc`, `nas`, or `mac-mini`.
 
-# Split Model
+## Split Model
 
 You can use this repository in two ways:
 
 1. Fork this repo and add hosts/dotfiles directly.
 2. As a flake input for a private repo (what I do).
 
-## Example Private Wrapper
+### Example Private Wrapper
 
 ```nix
 {

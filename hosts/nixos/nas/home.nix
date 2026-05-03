@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  imports = [
+    ../../../modules/nixos/home-gnome.nix
+  ];
+
   home.packages = [
     pkgs.sunshine
   ];

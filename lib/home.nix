@@ -41,6 +41,11 @@ in
     }:
     let
       homeDirectory = if platform == "nixos" then /home/${username} else /Users/${username};
+      platformHomeModule =
+        if platform == "nixos" then
+          self + "/modules/nixos/home-common.nix"
+        else
+          self + "/modules/${platform}/home.nix";
     in
     {
       home-manager.useGlobalPkgs = true;
@@ -52,7 +57,7 @@ in
           (self + "/modules/shared/home.nix")
         ]
         ++ [
-          (self + "/modules/${platform}/home.nix")
+          platformHomeModule
           (hostsRoot + "/${platform}/${hostName}/home.nix")
         ];
 

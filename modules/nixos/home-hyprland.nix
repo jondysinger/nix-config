@@ -1,4 +1,4 @@
-# NixOS-specific home-manager configuration for Noctalia, Hyprland, and desktop UX.
+# Home Manager configuration for a Hyprland-based desktop session.
 
 {
   pkgs,
@@ -8,33 +8,6 @@
 {
   imports = [
     noctalia.homeModules.default
-  ];
-
-  home.packages = [
-    # Hardware and system inspection tools
-    pkgs.usbutils
-    pkgs.pciutils
-    pkgs.mesa-demos
-    pkgs.gdu
-    pkgs.smartmontools
-    pkgs.lm_sensors
-
-    # Nix and editor tooling
-    pkgs.lua-language-server
-    pkgs.nil
-    pkgs.nixfmt-rfc-style
-    pkgs.stylua
-    pkgs.tree-sitter
-
-    # Media tooling
-    pkgs.mkvtoolnix
-
-    # Rust toolchain
-    pkgs.rustc
-    pkgs.cargo
-    pkgs.rust-analyzer
-    pkgs.clippy
-    pkgs.rustfmt
   ];
 
   programs.noctalia-shell = {
@@ -127,23 +100,11 @@
     };
   };
 
-  # Brave with scaling
-  programs.chromium = {
-    enable = true;
-    package = pkgs.brave;
-    commandLineArgs = [ "--force-device-scale-factor=1.20" ];
-  };
-
-  # NixOS-specific zsh configuration
-  programs.zsh.shellAliases = {
-    norb = "sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
-  };
-
   # Hyprland configuration files (Nix-managed)
   xdg.configFile = {
-    "noctalia/plugins/hostname/manifest.json".source = ./noctalia/plugins/hostname/manifest.json;
+    "noctalia/plugins/hostname/manifest.json".source = ./hypr/noctalia/plugins/hostname/manifest.json;
     "noctalia/plugins/hostname/HostnameWidget.qml".source =
-      ./noctalia/plugins/hostname/HostnameWidget.qml;
+      ./hypr/noctalia/plugins/hostname/HostnameWidget.qml;
     "hypr/hyprland.conf".text = builtins.readFile ./hypr/hyprland.conf;
     "hypr/keybinds.conf".text = builtins.readFile ./hypr/keybinds.conf;
     "hypr/autostart.conf".text = builtins.readFile ./hypr/autostart.conf;
@@ -153,15 +114,6 @@
       text = builtins.readFile ./hypr/monitors-default.conf;
       # Allow host-specific configs to override
       force = true;
-    };
-  };
-
-  # GTK icon theme for Thunar and other GTK apps
-  gtk = {
-    enable = true;
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
     };
   };
 
