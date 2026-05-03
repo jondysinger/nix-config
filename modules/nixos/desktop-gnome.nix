@@ -20,6 +20,7 @@
   services.gvfs.enable = true; # Trash, mounts, and Nautilus integration.
 
   environment.systemPackages = with pkgs; [
+    gnomeExtensions.dash-to-panel
     nautilus
     gnome-tweaks
     gnome-extension-manager
