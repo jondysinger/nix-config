@@ -10,8 +10,7 @@
 {
   home.packages =
     (with pkgs; [
-      # Neovim and dependencies
-      neovim
+      # Neovim dependencies
       ripgrep
       tree-sitter
 
@@ -39,6 +38,8 @@
       ssh-to-age
     ])
     ++ (with pkgs-unstable; [
+      # Code editing
+      neovim
       # CLI AI coding tools
       codex
       claude-code
