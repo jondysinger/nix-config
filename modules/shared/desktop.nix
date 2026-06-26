@@ -15,11 +15,29 @@ let
       hash = "sha256-9ti5b+aFqGMsgZzAk6JIrOD2urQQ9EpskpomEbHrsXw=";
     };
   };
+
+  obsidian-desktop = pkgs.makeDesktopItem {
+    name = "obsidian";
+    desktopName = "Obsidian";
+    genericName = "Markdown Editor";
+    comment = "Knowledge base and note-taking app";
+    exec = "obsidian %u";
+    icon = "obsidian";
+    categories = [
+      "Office"
+      "TextEditor"
+    ];
+    mimeTypes = [
+      "text/markdown"
+      "x-scheme-handler/obsidian"
+    ];
+  };
 in
 {
   environment.systemPackages =
     [
       obsidian-appimage
+      obsidian-desktop
     ]
     ++ (with pkgs; [
       brave
