@@ -5,10 +5,23 @@
   pkgs-unstable,
   ...
 }:
+let
+  obsidian-appimage = pkgs.appimageTools.wrapType2 {
+    pname = "obsidian";
+    version = "1.12.7";
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.12.7/Obsidian-1.12.7.AppImage";
+      hash = "sha256-9ti5b+aFqGMsgZzAk6JIrOD2urQQ9EpskpomEbHrsXw=";
+    };
+  };
+in
 {
   environment.systemPackages =
-    (with pkgs; [
-      obsidian
+    [
+      obsidian-appimage
+    ]
+    ++ (with pkgs; [
       brave
     ])
     ++ (with pkgs-unstable; [
