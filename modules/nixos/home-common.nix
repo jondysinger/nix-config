@@ -17,7 +17,7 @@
     # Nix and editor tooling
     pkgs.lua-language-server
     pkgs.nil
-    pkgs.nixfmt-rfc-style
+    pkgs.nixfmt
     pkgs.stylua
     pkgs.tree-sitter
 

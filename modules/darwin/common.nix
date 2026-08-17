@@ -8,7 +8,7 @@
   environment.systemPackages = with pkgs; [
     # Formatters
     nil
-    nixfmt-rfc-style
+    nixfmt
     stylua
   ];
 
