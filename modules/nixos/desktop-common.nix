@@ -7,6 +7,34 @@
   mediaDir,
   ...
 }:
+let
+  obsidian-appimage = pkgs.appimageTools.wrapType2 {
+    pname = "obsidian";
+    version = "1.12.7";
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.12.7/Obsidian-1.12.7.AppImage";
+      hash = "sha256-9ti5b+aFqGMsgZzAk6JIrOD2urQQ9EpskpomEbHrsXw=";
+    };
+  };
+
+  obsidian-desktop = pkgs.makeDesktopItem {
+    name = "obsidian";
+    desktopName = "Obsidian";
+    genericName = "Markdown Editor";
+    comment = "Knowledge base and note-taking app";
+    exec = "obsidian %u";
+    icon = "obsidian";
+    categories = [
+      "Office"
+      "TextEditor"
+    ];
+    mimeTypes = [
+      "text/markdown"
+      "x-scheme-handler/obsidian"
+    ];
+  };
+in
 {
   # Theme related
   stylix.targets.chromium.enable = false; # Better results to use GTK theme instead
@@ -26,16 +54,22 @@
     variant = "";
   };
 
-  environment.systemPackages =
-    (with pkgs; [
-      ghostty # Terminal
-      easyeffects # Audio effect
-      piper # Mouse settings
-      jellyfin-media-player
-    ])
-    ++ (with pkgs-unstable; [
-      mullvad-vpn
-    ]);
+  environment.systemPackages = [
+    obsidian-appimage
+    obsidian-desktop
+  ]
+  ++ (with pkgs; [
+    brave
+
+    ghostty # Terminal
+    easyeffects # Audio effect
+    piper # Mouse settings
+    jellyfin-media-player
+  ])
+  ++ (with pkgs-unstable; [
+    moonlight-qt
+    mullvad-vpn
+  ]);
 
   programs.steam.enable = true;
 

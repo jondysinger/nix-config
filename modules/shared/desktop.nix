@@ -1,51 +1,7 @@
 # Shared desktop-oriented packages and visual defaults for graphical hosts.
 
+{ pkgs, ... }:
 {
-  pkgs,
-  pkgs-unstable,
-  ...
-}:
-let
-  obsidian-appimage = pkgs.appimageTools.wrapType2 {
-    pname = "obsidian";
-    version = "1.12.7";
-
-    src = pkgs.fetchurl {
-      url = "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.12.7/Obsidian-1.12.7.AppImage";
-      hash = "sha256-9ti5b+aFqGMsgZzAk6JIrOD2urQQ9EpskpomEbHrsXw=";
-    };
-  };
-
-  obsidian-desktop = pkgs.makeDesktopItem {
-    name = "obsidian";
-    desktopName = "Obsidian";
-    genericName = "Markdown Editor";
-    comment = "Knowledge base and note-taking app";
-    exec = "obsidian %u";
-    icon = "obsidian";
-    categories = [
-      "Office"
-      "TextEditor"
-    ];
-    mimeTypes = [
-      "text/markdown"
-      "x-scheme-handler/obsidian"
-    ];
-  };
-in
-{
-  environment.systemPackages =
-    [
-      obsidian-appimage
-      obsidian-desktop
-    ]
-    ++ (with pkgs; [
-      brave
-    ])
-    ++ (with pkgs-unstable; [
-      moonlight-qt
-    ]);
-
   # System wide theme integration
   stylix = {
     enable = true;
