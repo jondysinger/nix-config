@@ -47,6 +47,7 @@
   services.openssh.enable = true;
   services.mullvad-vpn = {
     enable = true;
+    enableExcludeWrapper = false;
     package = pkgs-unstable.mullvad-vpn;
   };
 
