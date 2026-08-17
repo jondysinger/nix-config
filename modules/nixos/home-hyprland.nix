@@ -10,25 +10,21 @@
     noctalia.homeModules.default
   ];
 
-  programs.noctalia-shell = {
+  programs.noctalia = {
     enable = true;
-    plugins = {
-      version = 2;
-      sources = [
-        {
-          enabled = true;
-          name = "Noctalia Plugins";
-          url = "https://github.com/noctalia-dev/noctalia-plugins";
-        }
-      ];
-      states = {
-        hostname = {
-          enabled = true;
-          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-        };
-      };
-    };
     settings = {
+      plugins = {
+        sources = [
+          {
+            enabled = true;
+            kind = "git";
+            name = "official";
+            location = "https://github.com/noctalia-dev/noctalia-plugins";
+          }
+        ];
+        enabled = [ "hostname" ];
+      };
+
       bar = {
         position = "top";
         density = "spacious";
