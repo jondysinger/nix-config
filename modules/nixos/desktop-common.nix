@@ -65,10 +65,10 @@ in
     easyeffects # Audio effect
     piper # Mouse settings
     jellyfin-media-player
+    mullvad-vpn
   ])
   ++ (with pkgs-unstable; [
     moonlight-qt
-    mullvad-vpn
   ]);
 
   programs.steam.enable = true;

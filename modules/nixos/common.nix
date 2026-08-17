@@ -3,7 +3,6 @@
 {
   pkgs,
   lib,
-  pkgs-unstable,
   ...
 }:
 {
@@ -45,11 +44,7 @@
   # Other services
   services.ratbagd.enable = true;
   services.openssh.enable = true;
-  services.mullvad-vpn = {
-    enable = true;
-    enableExcludeWrapper = false;
-    package = pkgs-unstable.mullvad-vpn;
-  };
+  services.mullvad-vpn.enable = true;
 
   # Networking and security
   networking.networkmanager.enable = true;
