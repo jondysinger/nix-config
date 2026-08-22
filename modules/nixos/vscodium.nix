@@ -31,7 +31,7 @@ in
         };
         "nix.formatterPath" = "${pkgs.nixfmt}/bin/nixfmt";
         "direnv.path.executable" = "${pkgs.direnv}/bin/direnv";
-        "prettier.prettierPath" = "${pkgs.prettier}/bin/prettier";
+        "prettier.prettierPath" = "${pkgs.prettier}/lib/node_modules/prettier";
         "[json]" = {
           "editor.defaultFormatter" = "esbenp.prettier-vscode";
           "editor.formatOnSave" = true;
