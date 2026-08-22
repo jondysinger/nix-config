@@ -23,6 +23,7 @@
         "firefox.desktop"
         "org.gnome.Nautilus.desktop"
         "jellyfin-media-player.desktop"
+        "codium.desktop"
         "com.mitchellh.ghostty.desktop"
         "steam.desktop"
         "obsidian.desktop"

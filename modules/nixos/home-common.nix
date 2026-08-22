@@ -32,6 +32,10 @@
     pkgs.rustfmt
   ];
 
+  imports = [
+    ./vscodium.nix
+  ];
+
   gtk = {
     enable = true;
     iconTheme = {
