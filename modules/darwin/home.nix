@@ -47,12 +47,12 @@ in
         # Dock apps configuration
         persistent-apps = [
           (mkDockApp "/System/Applications/Launchpad.app")
-          (mkDockApp "/Applications/Nix Apps/Google Chrome.app")
-          (mkDockApp "/Applications/Nix Apps/Brave Browser.app")
-          (mkDockApp "/Applications/Nix Apps/Moonlight.app")
+          (mkDockApp "/Applications/Google Chrome.app")
+          (mkDockApp "/Applications/Brave Browser.app")
+          (mkDockApp "/Applications/Moonlight.app")
           (mkDockApp "/Applications/Jellyfin Media Player.app")
           (mkDockApp "/Applications/Ghostty.app")
-          (mkDockApp "/Applications/Nix Apps/Obsidian.app")
+          (mkDockApp "/Applications/Obsidian.app")
         ];
         # Optional dock settings
         autohide = false;
