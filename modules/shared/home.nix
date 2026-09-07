@@ -8,6 +8,10 @@
   ...
 }:
 {
+  imports = [
+    ./vscodium.nix
+  ];
+
   home.packages =
     (with pkgs; [
       # Neovim dependencies

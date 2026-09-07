@@ -14,6 +14,7 @@
       "ghostty"
       "jellyfin-media-player"
       "mullvad-vpn"
+      "vscodium"
     ];
   };
 }

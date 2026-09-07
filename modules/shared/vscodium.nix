@@ -1,11 +1,16 @@
 { pkgs, ... }:
 let
+  openaiPlatform = if pkgs.stdenv.hostPlatform.isDarwin then "darwin-arm64" else "linux-x64";
   openaiCodex = pkgs.vscode-utils.buildVscodeExtension {
     pname = "openai-chatgpt";
     version = "26.5818.41509";
     src = pkgs.fetchurl {
-      url = "https://open-vsx.org/api/openai/chatgpt/linux-x64/26.5818.41509/file/openai.chatgpt-26.5818.41509@linux-x64.vsix";
-      hash = "sha256-25A9EWUAhdfBXcKxY/8V5GSN1oXNitqSZXnCDVXA8fY=";
+      url = "https://open-vsx.org/api/openai/chatgpt/${openaiPlatform}/26.5818.41509/file/openai.chatgpt-26.5818.41509@${openaiPlatform}.vsix";
+      hash =
+        if pkgs.stdenv.hostPlatform.isDarwin then
+          "sha256-sUwOjirfZgGUZTDfpo2qXuvnY3uF2MWZz+3LKYCnPhM="
+        else
+          "sha256-25A9EWUAhdfBXcKxY/8V5GSN1oXNitqSZXnCDVXA8fY=";
     };
     vscodeExtPublisher = "openai";
     vscodeExtName = "chatgpt";
@@ -15,7 +20,9 @@ in
 {
   programs.vscodium = {
     enable = true;
-    package = pkgs.vscodium;
+    # Homebrew owns the application bundle on macOS; Home Manager still owns
+    # its settings and extensions there.
+    package = if pkgs.stdenv.hostPlatform.isDarwin then null else pkgs.vscodium;
     profiles.default = {
       extensions = with pkgs.vscode-extensions; [
         openaiCodex
