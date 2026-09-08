@@ -17,6 +17,13 @@ let
   };
 in
 {
+  # Local Home Manager documentation is unused.
+  manual = {
+    html.enable = false;
+    manpages.enable = false;
+    json.enable = false;
+  };
+
   home.sessionVariables = {
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
