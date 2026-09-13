@@ -30,7 +30,10 @@
         "trash.desktop"
       ];
       disable-user-extensions = false;
-      enabled-extensions = [ "dash-to-panel@jderose9.github.com" ];
+      enabled-extensions = [
+        pkgs.gnomeExtensions.appindicator.extensionUuid
+        "dash-to-panel@jderose9.github.com"
+      ];
     };
 
     "org/gnome/shell/extensions/dash-to-panel" = {
