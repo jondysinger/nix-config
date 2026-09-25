@@ -11,6 +11,7 @@
       "tree-sitter"
     ];
     casks = [
+      "discord"
       "ghostty"
       "jellyfin-media-player"
       "mullvad-vpn"

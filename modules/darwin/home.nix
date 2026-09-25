@@ -57,6 +57,7 @@ in
           (mkDockApp "/Applications/Google Chrome.app")
           (mkDockApp "/Applications/Brave Browser.app")
           (mkDockApp "/Applications/Moonlight.app")
+          (mkDockApp "/Applications/Discord.app")
           (mkDockApp "/Applications/Jellyfin Media Player.app")
           (mkDockApp "/Applications/VSCodium.app")
           (mkDockApp "/Applications/Ghostty.app")
