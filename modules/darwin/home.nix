@@ -33,7 +33,6 @@ in
   home.sessionPath = [
     "/opt/homebrew/bin"
     "/opt/homebrew/sbin"
-    "${config.home.homeDirectory}/.cargo/bin"
   ];
 
   # Darwin-specific zsh configuration
