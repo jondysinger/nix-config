@@ -8,10 +8,6 @@
     gcc
     gnumake
 
-    # Container runtime tools
-    podman
-    podman-compose
-
     # Theme related
     base16-schemes # Used for stylix color scheme
   ];

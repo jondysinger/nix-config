@@ -25,6 +25,10 @@
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
   environment.systemPackages = with pkgs; [
+    # Container runtime tools
+    podman
+    podman-compose
+
     libratbag # Backend for piper mouse config
   ];
 
