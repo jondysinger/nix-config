@@ -44,9 +44,6 @@
     ++ (with pkgs-unstable; [
       # Code editing
       neovim
-      # CLI AI coding tools
-      codex
-      claude-code
     ]);
 
   fonts.fontconfig.enable = true;
